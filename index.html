@@ -24,7 +24,9 @@
     <h1>ga sucks</h1>
     <form>
       <label for="i">event:</label>
-      <input type="text" name="event" id="i" />
+      <input type="text" name="event" id="i" required />
+      <label for="ii">payload:</label>
+      <textarea type="text" name="payload" id="ii" />
       <pre id="error" style="color: red"></pre>
     </form>
     <h2>events:</h2>
@@ -36,7 +38,8 @@
       const formData = new FormData(event.currentTarget);
       try {
         const event = JSON.parse(formData.get("event"));
-        dataLayer.push(event);
+        const payload = JSON.parse(formData.get("payload"));
+        gtag("event", event, payload);
         document.querySelector("#error").innerText = "";
       } catch (error) {
         document.querySelector("#error").innerText = error;
