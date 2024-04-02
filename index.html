@@ -38,7 +38,7 @@
       const formData = new FormData(event.currentTarget);
       try {
         const event = formData.get("event");
-        const payload = JSON.parse(formData.get("payload"));
+        const payload = JSON.parse(formData.get("payload") || "{}");
         gtag("event", event, payload);
         document.querySelector("#error").innerText = "";
       } catch (error) {
